@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DivarCrawler", "DivarCrawler\DivarCrawler.csproj", "{099D8E13-435A-4760-8D46-1309C21032D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DivarTelegramBot", "DivarTelegramBot\DivarTelegramBot.csproj", "{A823FED4-8E37-4E7D-8DA1-ABC573AC43E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DivarDataAccess", "DivarDataAccess\DivarDataAccess.csproj", "{AB4E07D7-2057-4C7F-95AE-51CB209497A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{099D8E13-435A-4760-8D46-1309C21032D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{099D8E13-435A-4760-8D46-1309C21032D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{099D8E13-435A-4760-8D46-1309C21032D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{099D8E13-435A-4760-8D46-1309C21032D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A823FED4-8E37-4E7D-8DA1-ABC573AC43E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A823FED4-8E37-4E7D-8DA1-ABC573AC43E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A823FED4-8E37-4E7D-8DA1-ABC573AC43E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A823FED4-8E37-4E7D-8DA1-ABC573AC43E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB4E07D7-2057-4C7F-95AE-51CB209497A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB4E07D7-2057-4C7F-95AE-51CB209497A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB4E07D7-2057-4C7F-95AE-51CB209497A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB4E07D7-2057-4C7F-95AE-51CB209497A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

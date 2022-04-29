@@ -1,12 +1,9 @@
-﻿using DivarCrawler.Database.Domain;
-using DivarCrawler.Models;
+﻿using DivarCrawler.Models;
+using DivarDataAccess.Database.Domain;
+using DivarDataAccess.Repositories;
 using System.Text.Json;
 using Telegram.Bot;
-using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.InputFiles;
-using Telegram.Bot.Types.ReplyMarkups;
 
 namespace DivarCrawler.Services
 {
@@ -33,25 +30,22 @@ namespace DivarCrawler.Services
 
             var divarItemList = data.widget_list.Select(s => new DivarItem
             {
-                Category = s.data.category,
-                City = s.data.city,
-                Description = s.data.description,
                 District = s.data.district,
-                Images = $"{s.data.image},{string.Join(",", s.data.web_image.Select(ss => ss.src))}",
                 Title = s.data.title,
                 Token = s.data.token,
                 IsSendToTelegram = false,
                 CreationDate = DateTime.Now,
+                  //RequestId 
             }).ToList();
 
             var tokenLists = divarItemList.Select(s => s.Token).ToList();
 
-            using var db = new DatabasServices();
+            using var db = new DivarItemRepository();
             {
-                var existlist = await db.GetExistDivarItems(tokenLists);
+                var existlist = await db.GetExistItems(tokenLists);
 
                 var insertedList = divarItemList.Where(w => !existlist.Contains(w.Token)).ToList();
-                await db.InsertManyDivarItem(insertedList);
+                await db.InsertMany(insertedList);
             }
         }
 

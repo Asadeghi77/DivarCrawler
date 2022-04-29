@@ -1,4 +1,4 @@
-﻿namespace DivarCrawler.Models
+﻿namespace DivarTelegramBot.Models
 {
     public class CommandItem
     {

@@ -1,7 +1,7 @@
-﻿using DivarCrawler.Database.Domain;
+﻿using DivarDataAccess.Database.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace DivarCrawler.Database
+namespace DivarDataAccess.Database
 {
     public class DivarDbContext : DbContext
     {
@@ -20,6 +20,17 @@ namespace DivarCrawler.Database
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlite($"Data Source={DbPath}");
+        }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<DivarItem>().HasOne(c => c.Request)
+                .WithMany(c => c.DivarItems)
+                .HasForeignKey(c => c.RequestId)
+                ;
         }
     }
 }

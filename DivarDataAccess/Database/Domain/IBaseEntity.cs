@@ -1,4 +1,4 @@
-﻿namespace DivarCrawler.Database.Domain
+﻿namespace DivarDataAccess.Database.Domain
 {
     public interface IBaseEntity
     {
