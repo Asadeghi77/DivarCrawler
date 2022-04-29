@@ -22,7 +22,7 @@ public class Program
     public static void Main()
     {
         worker.DoWork += Worker_DoWork;
-        Timer timer = new Timer(Timer_Elapsed, null, 0, 1000);
+        Timer timer = new Timer(Timer_Elapsed, null, 0, 1500000);
         Console.WriteLine("Start BG worker");
 
 
