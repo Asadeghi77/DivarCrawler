@@ -43,6 +43,13 @@ namespace DivarTelegramBot.Services
                 if (commandInputs.Length != 3)
                     await client.SendTextMessageAsync(chatId, $"send me true mesage");
 
+                var mainUrl = divarServices.GeneratDivarApiFromUrl(commandInputs[2]?.Trim());
+                if (string.IsNullOrEmpty(mainUrl))
+                {
+                    await client.SendTextMessageAsync(chatId, $"url is wrong, call ali");
+                    return;
+                }
+
                 using (var db = new RequestRepository())
                 {
                     await db.Insert(new Request
@@ -51,7 +58,7 @@ namespace DivarTelegramBot.Services
                         IsActive = true,
                         LastCheck = DateTime.UtcNow,
                         Name = commandInputs[1]?.Trim(),
-                        Url = divarServices.GeneratDivarApiFromUrl(commandInputs[2]?.Trim())
+                        Url = mainUrl
                     });
                 }
                 await client.SendTextMessageAsync(chatId, $"ok");

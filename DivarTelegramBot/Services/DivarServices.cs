@@ -15,8 +15,22 @@ namespace DivarTelegramBot.Services
 
         public string GeneratDivarApiFromUrl(string url)
         {
-            var uri = new Uri(url);
-            return $"https://api.divar.ir/v8/web-search/tehran/rent-apartment{uri.Query}";
+            try
+            {
+                var queryIndex = url.ToLower().IndexOf("/s/") + 3;
+                var query = url.Substring(queryIndex);
+                return $"https://api.divar.ir/v8/web-search/{query}";
+            }
+            catch (Exception ex)
+            {
+                var defaultColor = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"----------------------------------------------------------");
+                Console.WriteLine($"GeneratDivarApiFromUrl : {ex.Message} \n url: {url}");
+                Console.WriteLine($"----------------------------------------------------------");
+                Console.ForegroundColor = defaultColor;
+                return null;
+            }
         }
 
         public async Task CrawleUrl(Request request)
