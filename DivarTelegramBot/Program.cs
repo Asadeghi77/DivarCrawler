@@ -14,7 +14,7 @@ public class Program
     private static BackgroundWorker worker = new BackgroundWorker();
     private static DivarServices divarServices = new DivarServices();
     private static TelegramService telegramService = new TelegramService();
-    
+
     private static ReceiverOptions? options = new ReceiverOptions();
     private static ConsoleColor defaultColor = Console.ForegroundColor;
     private static string tokenKey = "5312553515:AAFfYV_2lfNQBa8H2okf_5TgzdM-3AdfDwM";
@@ -38,15 +38,28 @@ public class Program
 
     private static async Task updatehandler(ITelegramBotClient client, Update model, CancellationToken cancellationToken)
     {
-        var text = model.Message.Text;
-        var chatId = model.Message.Chat.Id;
+        try
+        {
+            if (model.Message is null)
+                return;
 
-        if (text.Contains("/start"))
-            await telegramService.Start(client, chatId);
-        else if (text.Contains("/reg"))
-            await telegramService.RegisterRequest(client, chatId, text);
-        else
-            await telegramService.NotDetectedMessage(client, chatId);
+            var text = model.Message.Text;
+            var chatId = model.Message.Chat.Id;
+
+            if (text.Contains("/start"))
+                await telegramService.Start(client, chatId);
+            else if (text.Contains("/reg"))
+                await telegramService.RegisterRequest(client, chatId, text);
+            else
+                await telegramService.NotDetectedMessage(client, chatId);
+        }
+        catch (Exception ex)
+        {
+            var defaultColor = Console.ForegroundColor;
+            Write("----------------------------------------------------------", ConsoleColor.Red,defaultColor);
+            Write($"updatehandler {ex.Message}", ConsoleColor.Red,defaultColor);
+            Write("----------------------------------------------------------", ConsoleColor.Red,defaultColor);
+        }
     }
 
 
@@ -97,11 +110,11 @@ public class Program
     private static void Write(string msg, ConsoleColor beforeColor, ConsoleColor defaultColor)
     {
         Console.ForegroundColor = beforeColor;
-       // Console.WriteLine(msg);
+        Console.WriteLine(msg);
         Console.ForegroundColor = defaultColor;
     }
 
-    
+
 
 
 }
